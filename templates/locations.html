@@ -1,0 +1,43 @@
+{% extends "layout.html" %} {% block main %}
+
+<div class="d-flex flex-row-reverse">
+	<a
+		href="{{url_for('addlocation')}}"
+		class="btn btn-outline-success"
+		data-toggle="tooltip"
+		data-placement="bottom"
+		title="Add New Product"
+	>
+		<i class="fa fa-edit"></i>
+	</a>
+</div>
+
+<table class="table mt-2 shadow-sm">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Location Name</th>
+			<th scope="col" colspan="2">Location Address</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for location in locations %}
+		<tr>
+			<td>{{location.locationName}}</td>
+			<td>{{location.locationAddress}}</td>
+			<td>
+				<a
+					href="{{ url_for('updatelocation', locationId=location.id) }}"
+					class="btn btn-outline-info btn-sm"
+					data-toggle="tooltip"
+					data-placement="bottom"
+					title="Edit Location"
+				>
+					<i class="fa fa-edit"></i>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

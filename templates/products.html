@@ -1,0 +1,42 @@
+{% extends "layout.html" %} {% block main %}
+
+<div class="col-6 m-auto">
+	<div class="d-flex flex-row-reverse">
+		<a
+			href="{{url_for('addproduct')}}"
+			class="btn btn-outline-success"
+			data-toggle="tooltip"
+			data-placement="bottom"
+			title="Add New Product"
+		>
+			<i class="fa fa-edit"></i>
+		</a>
+	</div>
+
+	<table class="table table-striped mt-2 shadow-sm">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col" colspan="2">Product Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			<tr>
+				<td>{{product.productName}}</td>
+				<td>
+					<a
+						href="{{ url_for('updateproduct', productId=product.id) }}"
+						class="btn btn-outline-info btn-sm"
+						data-toggle="tooltip"
+						data-placement="bottom"
+						title="Edit Product"
+					>
+						<i class="fa fa-edit"></i>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

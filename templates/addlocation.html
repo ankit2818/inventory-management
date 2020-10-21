@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block main %}
+
+<div class="form m-auto col-6 shadow-sm">
+	<form action="" method="post">
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">{{ legend }}</legend>
+			<div class="form-group">
+				{{ form.locationName.label(class="form-control-label") }} {{
+				form.locationName(class="form-control form-control") }}
+			</div>
+			<div class="form-group">
+				{{ form.locationAddress.label(class="form-control-label") }} {{
+				form.locationAddress(class="form-control form-control") }}
+			</div>
+			<div class="form-group">
+				<div class="d-flex mt-4">
+					<a
+						href="{{url_for('locations')}}"
+						class="btn btn-outline-dark flex-grow-1 mr-1"
+					>
+						Cancel
+					</a>
+					{{ form.submit(class="btn btn-primary flex-grow-1 ml-1") }}
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+{% endblock %}

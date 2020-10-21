@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {% block main %}
+
+<div class="jumbotron bg-white mt-2 shadow-sm">
+	<h3 class="">Hello, {{ username.split()[0] }}</h3>
+	<p class="lead text-justify">
+		An inventory management system (or inventory system) is the process by
+		which you track your goods throughout your entire supply chain, from
+		purchasing to production to end sales. It governs how you approach
+		inventory management for your business.
+	</p>
+	<hr class="my-4" />
+	<p>
+		Each company will manage stock in their own unique way, depending on the
+		nature and size of their business. Let’s take a look at a simple
+		example.
+	</p>
+	<p class="lead">
+		<a class="btn btn-outline-primary" href="/products" role="button"
+			>Go to Products</a
+		>
+	</p>
+</div>
+
+<div class="jumbotron bg-white mt-2 shadow-sm py-2">
+	<p>
+		This project is created by
+		<a href="https://www.github.com/ankit2818" target="_new"
+			>Ankit Vishwakarma</a
+		>. I've completed my B.E. in <i>Information Technology</i> from Don
+		Bosco Institute of Technology.
+	</p>
+	<p>
+		You can see my other projects
+		<a href="https://www.github.com/ankit2818" target="_new">here</a>.
+	</p>
+</div>
+{% endblock %}
