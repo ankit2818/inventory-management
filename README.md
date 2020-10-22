@@ -29,7 +29,17 @@
 
 # Screenshots <a name = "Screenshots"></a>
 
--   Need to be added.
+<img src="screenshots/homepage.png"></img>
+<img src="screenshots/products.png"></img>
+<img src="screenshots/locations.png"></img>
+<img src="screenshots/productmovements.png"></img>
+<img src="screenshots/stock.png"></img>
+<img src="screenshots/addproduct.png"></img>
+<img src="screenshots/addlocation.png"></img>
+<img src="screenshots/addproductmovement.png"></img>
+<img src="screenshots/updateproduct.png"></img>
+<img src="screenshots/updatelocation.png"></img>
+<img src="screenshots/updateproductmovement.png"></img>
 
 # Functionality
 
