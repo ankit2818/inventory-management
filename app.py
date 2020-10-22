@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from forms import ProductForm, LocationForm
+from forms import ProductForm, LocationForm, ProductMovementForm
 from config import Config
 import random
 
@@ -11,8 +11,10 @@ app.config.from_object(Config)
 # Database
 db = SQLAlchemy(app)
 
+
+
 # Import Models
-from models import Product, Location
+from models import Product, Location, ProductMovement, Stock
 
 
 # Choose Random Username
@@ -36,7 +38,7 @@ def products():
 def addproduct():
     form = ProductForm()
     if form.validate_on_submit():
-        product = Product(productName = form.productName.data)
+        product = Product(productQuantity = form.productName.data)
         db.session.add(product)
         db.session.commit()
         flash('Product has been added.', 'success')
@@ -90,13 +92,69 @@ def updatelocation(locationId):
 
 # Product movement related routes
 @app.route('/productmovement')
-def productmmovement():
-    return render_template('productmovement.html', title="Product Movement")
+def productmovement():
+    productmovements = ProductMovement.query.all()
+    return render_template('productmovement.html', title="Product Movement", productmovements = productmovements)
+
+@app.route('/addproductmovement', methods=['GET', 'POST'])
+def addproductmovement():
+    form = ProductMovementForm()
+    # fetch all product and location data
+    products = Product.query.all()
+    locations = Location.query.all()
+    # create list of products and choices for selectfield
+    productsList = [(product.id, product.productName) for product in products]
+    locationsList = [(None, 'Select Location')] + [(location.id, location.locationName) for location in locations]
+    form.productName.default = None
+    form.productName.choices = productsList
+    form.fromLocation.choices = locationsList
+    form.toLocation.choices = locationsList
+    if form.validate_on_submit():
+        productmovement = ProductMovement(date = str(form.date.data), fromLocationId = form.fromLocation.data, toLocationId = form.toLocation.data, productId = form.productName.data, productQuantity = form.productQuantity.data)
+        db.session.add(productmovement)
+        db.session.commit()
+        flash('Product Movement has been added.', 'success')
+        return redirect(url_for("productmovement"))
+    return render_template('addproductmovement.html', title="Product Movements", form=form, legend = 'Add New Product Movement')
+
+
+@app.route('/updateproductmovement/<int:productmovementId>', methods=['GET', 'POST'])
+def updateproductmovement(productmovementId):
+    productmovement = ProductMovement.query.get_or_404(productmovementId)
+    form = ProductMovementForm()
+    if form.validate_on_submit():
+        productmovement.date = str(form.date.data)
+        productmovement.fromLocationId = form.fromLocation.data
+        productmovement.toLocationId = form.toLocation.data
+        productmovement.productId = form.productName.data
+        productmovement.productQuantity = form.productQuantity.data
+        db.session.commit()
+        flash('Product Movement has been updated.', 'success')
+        return redirect(url_for("productmovement"))
+    # fetch all product and location data
+    products = Product.query.all()
+    locations = Location.query.all()
+    # create list of products and choices for selectfield
+    productsList = [(product.id, product.productName) for product in products]
+    locationsList = [(None, 'Select Location')] + [(location.id, location.locationName) for location in locations]
+    form.productName.choices = productsList
+    form.fromLocation.choices = locationsList
+    form.toLocation.choices = locationsList
+    form.date.data = productmovement.date
+    if productmovement.fromLocationId:
+        form.fromLocation.data = ""
+    form.fromLocation.data = productmovement.fromLocationId
+    form.toLocation.data = productmovement.toLocationId
+    form.productName.data = productmovement.productId
+    form.productQuantity.data = productmovement.productQuantity
+    return render_template('addproductmovement.html', form=form, legend = 'Update Product Movement')
+
 
 # Stock related routes
 @app.route('/stock')
 def stock():
-    return render_template('stock.html', title="Stock")
+    stock = Stock.query.all()
+    return render_template('stock.html', title="Stock", stock = stock)
 
 
 

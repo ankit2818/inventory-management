@@ -1,5 +1,17 @@
 {% extends "layout.html" %} {% block main %}
 
+<div class="d-flex flex-row-reverse">
+	<a
+		href="{{url_for('addproductmovement')}}"
+		class="btn btn-outline-success"
+		data-toggle="tooltip"
+		data-placement="bottom"
+		title="Add New Product Movement"
+	>
+		<i class="fa fa-edit"></i>
+	</a>
+</div>
+
 <table class="table mt-2 shadow-sm">
 	<thead class="thead-light">
 		<tr>
@@ -7,11 +19,30 @@
 			<th scope="col">From Location</th>
 			<th scope="col">To Location</th>
 			<th scope="col">Product Name</th>
-			<th scope="col">Product Qty</th>
+			<th scope="col" colspan="2">Product Qty</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr></tr>
+		{% for productmovement in productmovements %}
+		<tr>
+			<td>{{productmovement.date}}</td>
+			<td>{{productmovement.fromLocation}}</td>
+			<td>{{productmovement.toLocation}}</td>
+			<td>{{productmovement.productName}}</td>
+			<td>{{productmovement.productQuantity}}</td>
+			<td>
+				<a
+					href="{{ url_for('updateproductmovement', productmovementId=productmovement.id) }}"
+					class="btn btn-outline-info btn-sm"
+					data-toggle="tooltip"
+					data-placement="bottom"
+					title="Edit Product Movement"
+				>
+					<i class="fa fa-edit"></i>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
 	</tbody>
 </table>
 
