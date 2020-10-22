@@ -11,17 +11,13 @@ app.config.from_object(Config)
 # Database
 db = SQLAlchemy(app)
 
-
-
 # Import Models
 from models import Product, Location, ProductMovement, Stock
-
 
 # Choose Random Username
 def username():
     usernameList = ["Hermione Granger", "Harry Potter", "Ron Weasley"]
     return random.choice(usernameList)
-
 
 @app.route('/')
 @app.route('/index')

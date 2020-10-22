@@ -1,4 +1,3 @@
-# from app import db # for debugging
 from __main__ import db
 import random
 
