@@ -45,8 +45,8 @@
 
     ❖ Add/View/Edit Products
     ❖ Add/View/Edit Locations
-    ❖ Add/View/Edit Stock
     ❖ Add/View/Edit Product Movements
+    ❖ View Stock
 
 ## ✍️ Author <a name = "authors"></a>
 
