@@ -33,15 +33,6 @@ class ProductMovement(db.Model):
     
     def __repr__(self):
         return f'{self.date}\t{self.fromLocation}\t{self.toLocation}\t{self.productName}\t{self.productQuantity}'
-    
-class Stock(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    locationId = db.Column(db.Integer, db.ForeignKey(Location.id))
-    productId = db.Column(db.Integer, db.ForeignKey(Product.id))
-    locationName = db.relationship(Location, foreign_keys=[locationId])
-    productName = db.relationship(Product, foreign_keys=[productId])
-    availableStock = db.Column(db.Integer, db.CheckConstraint(
-        'availableStock > 0'))
 
 
 db.create_all()

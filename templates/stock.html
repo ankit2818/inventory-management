@@ -9,11 +9,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for item in stock %}
+		{% for stock in stockAvailable %}
 		<tr>
-			<td>{{item.locationName}}</td>
-			<td>{{item.productName}}</td>
-			<td>{{item.availableStock}}</td>
+			<td>{{stock.locationName}}</td>
+			<td>{{stock.productName}}</td>
+			<td>{{stock.availableQuantity}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
